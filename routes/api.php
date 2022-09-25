@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 #Route::apiResource('customer','ApiTest');
-Route::post('/customer', 'App\Http\Controllers\ApiTest@index');
+Route::post('/register', 'App\Http\Controllers\Api\RegisterController@index');
