@@ -9,5 +9,5 @@ class UserData extends Model {
     use HasFactory;
     public $timestamps = false;
     protected $table = 'user_data';
-    protected $fillable = [ 'username', 'email', 'password', 'firstname', 'lastname', 'birthdate' ];
+    protected $fillable = [ 'username', 'email', 'password', 'fullname', 'birthdate' ];
 }

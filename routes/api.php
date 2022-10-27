@@ -21,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 #Route::apiResource('customer','ApiTest');
 Route::post('/register', 'App\Http\Controllers\Api\RegisterController@index');
+Route::get('/home', 'App\Http\Controllers\Api\CourseController@index');
+Route::get('/course/{courseid?}', 'App\Http\Controllers\Api\CourseController@coursedetail');

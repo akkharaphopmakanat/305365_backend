@@ -14,7 +14,7 @@ use App\Http\Controllers\ApiController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/test', function () {
     return view('welcome');
 });
 Route::post('foo',[ApiController::class,'index']); 

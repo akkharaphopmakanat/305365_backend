@@ -22,8 +22,7 @@ class RegisterController extends Controller {
             'username' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'firstname' => 'required',
-            'lastname' => 'required',
+            'fullname' => 'required',
             'birthdate' => 'required' ] );
 
             if ( $validator->fails() ) {
@@ -33,7 +32,7 @@ class RegisterController extends Controller {
             if ( UserData::where( 'username', request()->input( 'username' ) )->exists() ) {
                 return response()->json( [ 'registerStatus'=>'Failed', 'message'=>'Username already exist' ] );
             } else {
-                $user = UserData::create( request( [ 'username', 'email', 'password', 'firstname', 'lastname', 'birthdate' ] ) );
+                $user = UserData::create( request( [ 'username', 'email', 'password', 'fullname','birthdate' ] ) );
                 return response()->json( [ 'registerStatus'=>'Success', 'message'=>'Registered' ] );
             }
 
