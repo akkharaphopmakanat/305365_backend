@@ -25,7 +25,7 @@ Route::post('/login', 'App\Http\Controllers\Api\RegisterController@login');
 Route::get('/home', 'App\Http\Controllers\Api\CourseController@index');
 Route::post('/myowncourse', 'App\Http\Controllers\Api\CourseController@myowncourse');
 Route::get('/course/{courseid?}', 'App\Http\Controllers\Api\CourseController@coursedetail');
-Route::post('/addcourse', 'App\Http\Controllers\Api\CourseController@addcourse');
+Route::get('/addcourse', 'App\Http\Controllers\Api\CourseController@addcourse');
 Route::post('/delcourse/{courseid?}', 'App\Http\Controllers\Api\CourseController@delcourse');
 
 Route::post('/enroll', 'App\Http\Controllers\Api\CourseController@activeAdd');
