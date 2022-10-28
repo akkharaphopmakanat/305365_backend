@@ -16,6 +16,23 @@ class RegisterController extends Controller {
     * @return \Illuminate\Http\Response
     */
 
+    public function login( Request $request){
+       if (UserData::where( 'username', request()->input( 'username' ) )->exists())
+       {
+            $user = UserData::where( 'username', request()->input( 'username' ))->get()->first();
+            if($user['password'] == request()->input( 'password' )){
+                return response()->json(['loginStatus'=>'Success','message'=>'Login Success']);
+            }
+            else{
+                return response()->json(['loginStatus'=>'Failed','message'=>'Password incorrect']);
+            }
+            
+       }
+       else{
+        return response()->json(['loginStatus'=>'Failed','message'=>'Username not found.']);
+       }
+    }
+
     public function index( Request $request ) {
 
         $validator = Validator::make( $request->all(), [
