@@ -29,7 +29,7 @@ Route::get('/addcourse', 'App\Http\Controllers\Api\CourseController@addcourse');
 Route::post('/delcourse/{courseid?}', 'App\Http\Controllers\Api\CourseController@delcourse');
 
 Route::post('/enroll', 'App\Http\Controllers\Api\CourseController@activeAdd');
-Route::post('/enroll_list', 'App\Http\Controllers\Api\CourseController@activeGet');
+Route::get('/enroll_list', 'App\Http\Controllers\Api\CourseController@activeGet');
 Route::post('/unenroll/{courseid?}', 'App\Http\Controllers\Api\CourseController@activeDel');
 
 Route::post('/video_progress/{courseid?}', 'App\Http\Controllers\Api\CourseController@videoprog');

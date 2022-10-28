@@ -24,9 +24,18 @@ class CourseController extends Controller
             );
     }
     public function activeGet(Request $request){
-        $data = UserCourseActive::where("username",request()->input( 'username' ))->get();
+        $data = UserCourseActive::distinct()->where("username",request()->input( 'username' ))->get();
+        $retdata = array();
+        foreach($data as $a){
+            $getdata = json_decode(Course::where("course_id",$a['c_id'])->get()->first());
+            
+            if($getdata != null){
+                array_push($retdata ,$getdata);}
+
+        }
+
         return response()->json(
-            $data
+            $retdata
             );
     }
     public function activeDel($courseid = null){
