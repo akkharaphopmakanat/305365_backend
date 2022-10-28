@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-#Route::apiResource('customer','ApiTest');
+
 Route::post('/register', 'App\Http\Controllers\Api\RegisterController@index');
 Route::post('/login', 'App\Http\Controllers\Api\RegisterController@login');
 Route::get('/home', 'App\Http\Controllers\Api\CourseController@index');
@@ -35,3 +35,4 @@ Route::post('/unenroll/{courseid?}', 'App\Http\Controllers\Api\CourseController@
 Route::post('/video_progress/{courseid?}', 'App\Http\Controllers\Api\CourseController@videoprog');
 Route::post('/video_enroll_update/{courseid?}/{video_progess?}', 'App\Http\Controllers\Api\CourseController@activeUpdate');
 Route::post('/enroll_complete/{courseid?}', 'App\Http\Controllers\Api\CourseController@activeComplete');
+

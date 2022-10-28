@@ -10,11 +10,6 @@ use App\Models\UserData;
 
 class CourseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
     public function activeAdd(Request $request){
         $data = ['username'=>request()->input( 'username' ),'c_id'=>request()->input( 'course_id' ),'is_complete'=>false,'video_progress'=>1];
@@ -28,12 +23,9 @@ class CourseController extends Controller
         $retdata = array();
         foreach($data as $a){
             $getdata = json_decode(Course::where("course_id",$a['c_id'])->get()->first());
-            
             if($getdata != null){
                 array_push($retdata ,$getdata);}
-
         }
-
         return response()->json(
             $retdata
             );
@@ -45,7 +37,6 @@ class CourseController extends Controller
         return response()->json(["status"=>"Delete Already"]);
     }
     public function activeUpdate($courseid = null,$video_progess = null){
-        //$whereArray = array('username' => request()->input( 'username' ),'course_id' => $courseid);
         $result=UserCourseActive::where('username' , request()->input( 'username' ))->where('c_id' , $courseid) ->update([
             'video_progess' => $video_progess
          ]);
@@ -62,32 +53,25 @@ class CourseController extends Controller
 
     public function index()
     {
-
-        //$useractive = UserCourseActive::all();
-        //$course = Course::select('course_id','c_name', 'c_teacher', 'cat_id')->get();
-        $course = Course::select(
-            'course_id','c_name', 'c_teacher', 'cat_name'
-        )
-        ->get();
+        $course = Course::select('course_id','c_name', 'c_teacher', 'cat_name')->get();
         $count = count($course);
         return response()->json(
             $course
             );
-        
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function coursedetail($courseid = null)
     {
         $response = Course::where( 'course_id', $courseid)->get()->first();
         return response()->json( $response);
     }
+    public function myowncourse(Request $request)
+    {
+        $me = UserData::where( 'username', request()->input( 'username' ))->get()->first()['fullname'];
+        $mycourse = Course::where('c_teacher',$me)->get();
 
+        return response()->json($mycourse);
+    }
 
     public function addcourse(Request $request)
     {
@@ -102,44 +86,5 @@ class CourseController extends Controller
         $result=Course::where('course_id',$courseid)->delete();
         return response()->json(["status"=>"deleteAlready"]);
     }
-    public function myowncourse(Request $request)
-    {
-        $me = UserData::where( 'username', request()->input( 'username' ))->get()->first()['fullname'];
-        $mycourse = Course::where('c_teacher',$me)->get();
 
-        return response()->json($mycourse);
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
